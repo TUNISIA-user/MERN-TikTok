@@ -1,0 +1,57 @@
+.videoSideBar{
+    position: relative;
+    color: white;
+    bottom: 150px;
+    margin-left: 10px;
+    display: flex;}
+
+.videoFooter__text{
+    flex: 1;
+
+}
+
+@media (max-width: 768px)   {
+    .videoSideBar{
+        position: relative;
+        color: white;
+        bottom: 313px;
+        margin-left: 10px;
+        display: flex;
+    }
+ 
+    
+  }
+
+  
+
+
+.videoFooter__text > p {
+    padding-bottom: 20px;
+}
+.videoFooter__text > h3{
+    padding-bottom: 20px;
+    
+}
+.videoFooter__ticker > .ticker {
+ height: fit-content;
+ margin-left: 30px;
+ width: 60%;
+   
+ filter: invert(1);
+    
+}
+
+.smooth_vra{
+    display: flex;
+    
+}
+
+.vide__inner{
+    width: 50%;
+    height: 50%;
+    background-color: grey;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
