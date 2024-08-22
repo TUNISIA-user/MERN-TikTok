@@ -28,3 +28,11 @@ Once you’ve created and saved your `README.md` file:
 
    ```bash
    git clone https://github.com/yourusername/yourproject.git
+████████▀▀▀████
+████████────▀██
+████████──█▄──█
+███▀▀▀██──█████
+█▀──▄▄██──█████
+█──█████──█████
+█▄──▀▀▀──▄█████
+███▄▄▄▄▄███████
