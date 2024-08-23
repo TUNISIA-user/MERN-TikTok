@@ -12,7 +12,10 @@ const tiktokSchema = new mongoose.Schema({
     like1: Number,
     message: Number,
     share: Number,
-    comments: [commentSchema]
+    comments: [commentSchema],
+    // add new champ here 
+    img1:String ,
+    
 }, { timestamps: true });
 
 export default mongoose.model('tiktokVideos', tiktokSchema);
