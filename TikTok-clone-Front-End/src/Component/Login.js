@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css';
 import { auth } from '../firebase1';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -29,7 +29,7 @@ const Login = () => {
         type: "SET__USER__FROM__FIRE__BASE",
         payload__xuser:{
           email :  email.substr(0, email.indexOf("@")) ,
-          imgUrl  : imageURL,
+          imgUrl  : "https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg" ||"https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg",
           bio : null
         }
       });
@@ -38,17 +38,46 @@ const Login = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      const url = URL.createObjectURL(selectedFile);
-      setFile(selectedFile);
-      setImageURL(url);
+  // const handleFileChange = (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   if (selectedFile) {
+  //     const url = URL.createObjectURL(selectedFile);
+  //     setFile(selectedFile);
+  //     setImageURL(url);
        
-    }
-  };
+  //   }
+  // };
+
+  const api__data = [
+    { id: 1, img_link: 'https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg' },
+    { id: 2, img_link: 'https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image1-5.png' },
+    { id: 3, img_link: 'https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg' },
+    { id: 4, img_link: 'https://static.vecteezy.com/system/resources/previews/004/773/704/original/a-girl-s-face-with-a-beautiful-smile-a-female-avatar-for-a-website-and-social-network-vector.jpg' },
+    { id: 5, img_link: 'https://static.vecteezy.com/system/resources/previews/014/212/681/original/female-user-profile-avatar-is-a-woman-a-character-for-a-screen-saver-with-emotions-for-website-and-mobile-app-design-illustration-on-a-white-isolated-background-vector.jpg' }
+  ];
+
+  const [data_apiWork,setdata_apiWork]  = useState([])
+  const [Newuser,setNewusser]  = useState([])
+ 
+  useEffect(()=>{
+
+    
+
+    setdata_apiWork(api__data)
+
+  },[])
+  
+const POL__DATA = (id)=>{
+ 
+const response  = data_apiWork?.filter((index)=>index.id===id)
+
+ 
+setNewusser(response)
+console.log(Newuser)
+}
 
   return (
+    <>   
     <div className='center__container'>
       <div className="container">
         <div className="heading">Sign In For Tiktok</div>
@@ -73,14 +102,25 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
+          {/* <input
             className="input"
             type="file"
             name="file"
             id="file"
             onChange={handleFileChange}
-          />
-        
+          /> */}
+
+
+        <div className='copy'>
+
+     
+ 
+ {Newuser.length>0 ? Newuser.map(item=><img src={item.img_link}/>)  :  data_apiWork.map(item=><img src={item.img_link}     onClick={() => POL__DATA(item.id)} />) }
+</div>
+
+
+
+
           <span className="forgot-password">
             <a href="#">Forgot Password?</a>
           </span>
@@ -128,6 +168,12 @@ const Login = () => {
         </span>
       </div>
     </div>
+
+
+ 
+    </>
+
+
   );
 };
 

@@ -147,6 +147,33 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: black
+    background:  black
  
   }
+
+  
+
+  .copy   img{
+    width: 20%;
+    height: 20%;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 100%;
+  }
+
+
+  .copy {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    cursor: pointer;
+    background-color: red
+
+  }
+
+ 
+    .copy img:hover {
+      transform: scale(1.2); /* Adjust the scale factor as needed */
+    }
+    
+ 

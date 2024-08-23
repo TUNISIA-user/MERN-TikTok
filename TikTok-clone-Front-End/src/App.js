@@ -51,12 +51,13 @@ const App = () => {
     
    </div>
    <div className="profile-icons">
-    
-  
+ 
      <span class="material-symbols-outlined off">send</span>
      <span class="material-symbols-outlined off">chat_bubble</span>
- 
-  <Link to={"/profile/login"}><img loading="lazy"  style={{width:"30px",borderRadius:"100px"}}  alt="" src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/37088e0f4d5663fc7b1baab2317fd6cb~c5_720x720.jpeg?lk3s=a5d48078&amp;nonce=76217&amp;refresh_token=6ac8a92226bf0bfd183487e9c09400af&amp;x-expires=1724324400&amp;x-signature=tTIBkeBor74qKHSc6db1MXho2jY%3D&amp;shp=a5d48078&amp;shcp=a1d2006b" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>  </Link>
+   
+     <Link to={"/profile/login"}><img style={{width:"30px",borderRadius:"100px"}}    loading="lazy" alt="" src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/37088e0f4d5663fc7b1baab2317fd6cb~c5_720x720.jpeg?lk3s=a5d48078&amp;nonce=87403&amp;refresh_token=f730a5093ed08c51fdf8506338fa680c&amp;x-expires=1724518800&amp;x-signature=bi%2FjKPbFEI5JL14RLS9uPZ07dFk%3D&amp;shp=a5d48078&amp;shcp=81f88b70" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+       </Link>
+  
    </div>
  </header>
  
