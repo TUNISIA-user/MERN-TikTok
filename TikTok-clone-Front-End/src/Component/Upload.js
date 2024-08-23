@@ -13,7 +13,7 @@ const Upload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
+  const [imge1,setimg1] = useState("")
   useEffect(() => {
     console.log(selectedFile);
   }, [selectedFile]);
@@ -55,7 +55,8 @@ const Upload = () => {
         like1,
         message,
         share,
-      });
+        imge1 , 
+      });     
       setSuccess('Upload successful');
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -119,6 +120,13 @@ const Upload = () => {
         value={share}
         onChange={(e) => setShare(Number(e.target.value))}
       />
+      <input
+        type='text'
+        placeholder='add avatar'
+        value={imge1}
+        onChange={(e) => setimg1(e.target.value)}
+      />
+
       <button onClick={handleButtonClick} disabled={loading}>
         {loading ? "Loading..." : success ? success : "Send"}
       </button>

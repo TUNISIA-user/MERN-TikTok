@@ -3,12 +3,14 @@ import './Login.css';
 import { auth } from '../firebase1';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Nahdi_Gayth } from '../context/GlobalContext';
-import { useNavigate } from "react-router-dom";
+import { useFetcher, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const Nav = useNavigate();
   const Move = Nahdi_Gayth();
-  
+  const [data_apiWork,setdata_apiWork]  = useState([])
+  const [Newuser,setNewusser]  = useState("")
+ 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
@@ -30,8 +32,9 @@ const Login = () => {
         payload__xuser:{
           email :  email.substr(0, email.indexOf("@")) ,
           imgUrl  : "https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg" ||"https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg",
-          bio : null
-        }
+          bio : null,
+          
+        } 
       });
     } catch (error) {
       console.error('Error creating user:', error.message);
@@ -56,8 +59,6 @@ const Login = () => {
     { id: 5, img_link: 'https://static.vecteezy.com/system/resources/previews/014/212/681/original/female-user-profile-avatar-is-a-woman-a-character-for-a-screen-saver-with-emotions-for-website-and-mobile-app-design-illustration-on-a-white-isolated-background-vector.jpg' }
   ];
 
-  const [data_apiWork,setdata_apiWork]  = useState([])
-  const [Newuser,setNewusser]  = useState([])
  
   useEffect(()=>{
 
@@ -71,10 +72,12 @@ const POL__DATA = (id)=>{
  
 const response  = data_apiWork?.filter((index)=>index.id===id)
 
- 
+   
+console.log(response,"888")
 setNewusser(response)
-console.log(Newuser)
+ 
 }
+ 
 
   return (
     <>   
