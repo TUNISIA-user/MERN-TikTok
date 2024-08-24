@@ -10,6 +10,7 @@ This is a full-stack TikTok clone built using the MERN stack (MongoDB, Express, 
 - Responsive design
 - Handel DataBase
 -Deal with fire base
+-deal with logique
 
 ## Installation
 
