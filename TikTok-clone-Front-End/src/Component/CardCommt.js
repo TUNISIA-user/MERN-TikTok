@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { Nahdi_Gayth } from '../context/GlobalContext';
 import './CommonetSection.css';
-  
+// app founder Nahdi ghaith 
 const CardCommt = ({commet,username,img,time}) => {
      console.log(time,"ddcscs")
      const Move = Nahdi_Gayth()
