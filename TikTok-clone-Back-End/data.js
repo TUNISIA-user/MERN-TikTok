@@ -8,7 +8,8 @@
         song  : "@ Emino",
         like1 : 100,
         message : 100,
-        share  : 200 
+        share  : 200 , 
+        share2 : 300
     },
 
     { 
