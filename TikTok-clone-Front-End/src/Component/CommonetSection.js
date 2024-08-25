@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './CommonetSection.css';
 import CardCommt from './CardCommt';
 import { Nahdi_Gayth } from '../context/GlobalContext';
-import axios  from './axios';
+import axios from "./axios"
 
-const CommonetSection = () => {
+const CommonetSection = ({commt}) => {
  
  
   const Move = Nahdi_Gayth()
@@ -22,13 +22,14 @@ const CommonetSection = () => {
     try {
       const Token = input.substr(0, input.indexOf("/"));
       const commentText = input.substr(input.indexOf("/") + 1);
-  
+     
  
       const response2 = await axios.get(`/v4/newpost/${Token}`);
+      
       const allComments = response2.data.flatMap(item => item.comments || []);
-  
- 
     
+ 
+     // in this case get all data in RESPONSE__2 . 
 
     
       const response = await axios.put(`/v3/posts/${Token}`, {
@@ -37,20 +38,18 @@ const CommonetSection = () => {
   
       const finall__result = await axios.get(`/v4/newpost/${Token}`);
       const x = finall__result.data.flatMap(item => item.comments || []);
-      console.log(x,"new data")
-      setactullay(x)
-      
+     
+       actullay.length>0 ? setactullay(x) : setactullay([])
+        console.log(x,"new data")
   
     } catch (error) {
-      console.error("Error updating comment:", error);
+      console.error("Error updating 1:", error);
     
     }
    
   };
-  
  
-  
-console.log(actullay,"arr of data util.format()")
+ 
 
  const test = Move.toogle
   console.log(test)
@@ -88,8 +87,10 @@ console.log(actullay,"arr of data util.format()")
         })
        }}  >X</div>
        <div className='CommonetSection__insde'> 
-      {actullay && actullay.length > 0 ? (
-        actullay.map((comment, index) => (
+      {actullay.length > 0 ? (
+
+actullay.map((comment, index) => (
+        
           <CardCommt
             key={index} // Ensure unique key for each comment // ok .... 
             commet={comment.text || "No Comment Text"} // Adjust based on your data structure // ok .... 

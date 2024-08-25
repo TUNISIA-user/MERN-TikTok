@@ -3,7 +3,7 @@ import { Nahdi_Gayth } from '../context/GlobalContext';
 import './CommonetSection.css';
   
 const CardCommt = ({commet,username,img,time}) => {
-     console.log(time,"ddcscs")
+    
      const Move = Nahdi_Gayth()
  
      const hours = time.substr(11, 2);  

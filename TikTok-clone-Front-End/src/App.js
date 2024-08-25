@@ -6,13 +6,12 @@ import './App.css';
 import Login from './Component/Login';
 import { Nahdi_Gayth } from './context/GlobalContext';
 import Profile from './Component/Profile';
-import CommonetSection from './Component/CommonetSection';
 import './Component/Profile.css';
 import Upload from './Component/Upload';
 
 
-// @ app founder test 
 
+ 
 const App = () => {
   const [videos, setVideos] = useState([]);
   const Move = Nahdi_Gayth()
@@ -20,12 +19,17 @@ const App = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/v2/posts');
-       console.log(response.data,"dd")
+     
+        const response = await axios.get('/v2/posts', {
+          withCredentials: true
+      });
+      
+        console.log(response)
+      
         setVideos(response.data);
         
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.log('Error fetching posts:', error);
       }
     };
 
@@ -55,10 +59,10 @@ const App = () => {
    <div className="profile-icons">
     
   
-     <span class="material-symbols-outlined off">send</span>
-     <span class="material-symbols-outlined off">chat_bubble</span>
+     <span className="material-symbols-outlined off">send</span>
+     <span className="material-symbols-outlined off">chat_bubble</span>
  
-  <Link to={"/profile/login"}><img loading="lazy"  style={{width:"30px",borderRadius:"100px"}}  alt="" src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/37088e0f4d5663fc7b1baab2317fd6cb~c5_720x720.jpeg?lk3s=a5d48078&amp;nonce=76217&amp;refresh_token=6ac8a92226bf0bfd183487e9c09400af&amp;x-expires=1724324400&amp;x-signature=tTIBkeBor74qKHSc6db1MXho2jY%3D&amp;shp=a5d48078&amp;shcp=a1d2006b" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>  </Link>
+  <Link to={"/profile/login"}><img   style={{width:"30px",borderRadius:"100px"}}   src="https://picsum.photos/id/237/200/300" alt='dog-img'/>  </Link>
    </div>
  </header>
  
@@ -80,7 +84,7 @@ const App = () => {
             <div className="app_videos">
              
               {videos.map((item) => {
-                    console.log(item.comments,"||")
+                    console.log(item.comments)
                     return (
                       <>      
                     
