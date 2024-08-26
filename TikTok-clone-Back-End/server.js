@@ -25,7 +25,7 @@ mongoose.connect(connection_url, {
 
 //middlwares
  
-
+// across
 
 app.use(cors({
     origin: "http://localhost:3000",                  // this to acces the data from api 
