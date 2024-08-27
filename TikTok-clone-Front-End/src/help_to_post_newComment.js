@@ -68,3 +68,50 @@ const MyComponent = () => {
 };
 
 export default MyComponent;
+
+
+
+
+
+// add front end By search 
+const Post_Commnt = async () => {
+    try {
+        await axios.put(`/v3/posts/${videoId}`, {
+            comment: {
+                text: AddNewCommnt,
+                author: "John Doe",  // Optionally include more fields like author, timestamp, etc.
+                timestamp: new Date() // Automatically add timestamp
+            }
+        });
+
+        // Update the local state to include the new comment
+        Setstore((prev) => [...prev, { text: AddNewCommnt, author: "John Doe", timestamp: new Date() }]);
+        setAddNewCommnt(''); // Clear the input field
+    } catch (error) {
+        console.log("Error posting comment:", error);
+    }
+}
+
+
+// add back -end from my search 
+
+app.put("/v3/posts/:videoId", async (req, res) => {
+    try {
+        const updatedData = await Videos.updateOne(
+            { _id: req.params.videoId },  // Filter by videoId
+            { $push: { comments: req.body.comment } } // Push new comment into comments array
+        );
+
+        if (updatedData.matchedCount === 0) {
+            return res.status(404).json({ message: "Video not found" });
+        }
+
+        res.status(200).json({ message: "Comment added successfully" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: "Error adding comment", error: err });
+    }
+});
+
+
+
