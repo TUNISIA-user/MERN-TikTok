@@ -92,6 +92,11 @@ const Post_Commnt = async () => {
     }
 }
 
+// check this 
+const updatedData = await Videos.updateOne(
+            { _id: req.params.videoId },  // Filter by videoId
+            { $push: { comments: req.body.comment } } // Push new comment into comments array
+        );
 
 // add back -end from my search 
 
