@@ -1,4 +1,5 @@
-# MERN TikTok Clone
+# MERN TikTok Clone 
+
 
 This is a full-stack TikTok clone built using the MERN stack (MongoDB, Express, React, Node.js).
 
