@@ -15,6 +15,7 @@ import Upload from './Component/Upload';
 //.........
 // change templte 
 //Change state
+//learn redux
 const App = () => {
   const [videos, setVideos] = useState([]);
   const Move = Nahdi_Gayth()
