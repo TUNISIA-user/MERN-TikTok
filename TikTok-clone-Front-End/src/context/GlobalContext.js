@@ -2,7 +2,7 @@
 import { useReducer,createContext,useContext,useEffect, act } from "react";
 
 // founder  
-
+// you should change this in redux ... []
 const inititaleState ={
     user :null ,
     FLOWING : [] ,
