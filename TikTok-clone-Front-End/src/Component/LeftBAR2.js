@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./LeftBAR2.css";
 import { Nahdi_Gayth } from '../context/GlobalContext';
-
+ 
 
 const LeftBAR2 = () => {
 
