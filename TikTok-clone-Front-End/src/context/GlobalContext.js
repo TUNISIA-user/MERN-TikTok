@@ -1,4 +1,4 @@
-
+//reducer funcion and should be use redux 
 import { useReducer,createContext,useContext,useEffect, act } from "react";
 
 // founder  
