@@ -9,7 +9,7 @@ import Profile from './Component/Profile';
 import CommonetSection from './Component/CommonetSection';
 import './Component/Profile.css';
 import Upload from './Component/Upload';
-
+//, export react 
 
 // @ app founder test 
 //.........
