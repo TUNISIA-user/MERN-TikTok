@@ -3,7 +3,8 @@ import "./RightsideBar.css"
 
 import { Nahdi_Gayth } from '../context/GlobalContext'
 
-const RightsideBar = ({id,url,channel,like1,message,share,song}) => {
+const RightsideBar = ({id,url,channel,like1,message,share,song,desc,dataARRAY}) => {
+  console.log(dataARRAY,id)
   const [like,addLike] = useState(false)
  
   const Handel =()=>{
@@ -16,18 +17,21 @@ const RightsideBar = ({id,url,channel,like1,message,share,song}) => {
   }
  const Move = Nahdi_Gayth ();
 
-const function__say = (id,url,channel,like,message,share,song)=>{
-  console.log(id,url,channel,like,message,share,"song",song)
+const function__say = (id,url,channel,like1,message,share,song)=>{
+  
   Move.dispatch({
     type:"SET_FLOWING",
     payload__flow  : {
       id,
       url,
       channel,
-      like,
-      message,
+      like1 : dataARRAY.length>0?dataARRAY.length : like1,
+      message :  dataARRAY.length>0?dataARRAY.length : message,
       share,
-      song
+      song,
+      desc,
+
+
     }
 
   })

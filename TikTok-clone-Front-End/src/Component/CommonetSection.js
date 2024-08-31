@@ -4,14 +4,14 @@ import CardCommt from './CardCommt';
 import { Nahdi_Gayth } from '../context/GlobalContext';
 import axios  from './axios';
 
-const CommonetSection = () => {
+const CommonetSection = ({commt}) => {
  
  
   const Move = Nahdi_Gayth()
-  const [input,setinput] = useState("")
-  const [actullay,setactullay] = useState([])
- 
 
+  const [input,setinput] = useState("")
+  const [actullay,setactullay] = useState([]) // this all data
+  const [new1,setnew1] = useState([])   
  
 
  
@@ -27,7 +27,7 @@ const CommonetSection = () => {
       const response2 = await axios.get(`/v4/newpost/${Token}`);
       const allComments = response2.data.flatMap(item => item.comments || []);
   
- 
+      console.log(allComments)
     
 
     
@@ -37,7 +37,7 @@ const CommonetSection = () => {
   
       const finall__result = await axios.get(`/v4/newpost/${Token}`);
       const x = finall__result.data.flatMap(item => item.comments || []);
-      console.log(x,"new data")
+    
       setactullay(x)
       
   
@@ -45,15 +45,18 @@ const CommonetSection = () => {
       console.error("Error updating comment:", error);
     
     }
-   
+    // window.location.reload(); 
   };
   
+  useEffect(()=>{
+  
+    setnew1(commt)
+  },[])
  
   
-console.log(actullay,"arr of data util.format()")
 
  const test = Move.toogle
-  console.log(test)
+
   return ( 
    
     <div   className='CommonetSection'  style={test === false ? { display: 'none' } : { display: 'block' }}   >
@@ -87,12 +90,20 @@ console.log(actullay,"arr of data util.format()")
           type : "SET__TOOGLE__FALSE"
         })
        }}  >X</div>
+
+
+
+
+
+
+
+
        <div className='CommonetSection__insde'> 
       {actullay && actullay.length > 0 ? (
         actullay.map((comment, index) => (
           <CardCommt
-            key={index} // Ensure unique key for each comment // ok .... 
-            commet={comment.text || "No Comment Text"} // Adjust based on your data structure // ok .... 
+            key={index}   
+            commet={comment.text || "No Comment Text"}  
             username={ "Anonymous"} // Adjust based on your data structure
             img={'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg'}
             time={comment.createdAt}
@@ -100,7 +111,38 @@ console.log(actullay,"arr of data util.format()")
           
         ))
       ) : (
-        <p>No comments yet.</p>
+        <p>{new1.length>0 ? 
+            new1.map((item,index)=>
+              <CardCommt
+            key={index}   
+            commet={item.text || "No Comment Text"}  
+            username={ "Anonymous"} // Adjust based on your data structure
+            img={'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg'}
+            time={item.createdAt}
+          />
+            )
+          : 
+          <div className='FalseComment'>
+             
+          <div class="terminal-loader">
+            <div class="terminal-header">
+              <div class="terminal-title"><a href='https://github.com/TUNISIA-user' style={{textDecoration:"none",color:"#fff"}}> @Nahdi</a>  </div>
+              <div class="terminal-controls">
+                <div class="control close"></div>
+                <div class="control minimize"></div>
+                <div class="control maximize"></div>
+              </div>
+            </div>
+            <div class="text">post comment</div>
+          </div>
+
+                 
+                 </div>
+
+          
+      
+          
+          }</p>
       )}
 </div>
  
