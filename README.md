@@ -38,7 +38,7 @@ Once you’ve created and saved your `README.md` file:
 
    -- Create the comments table
 
-
+<h1>expmle of simple data base</h1>
 <img src="sql.PNG"/>
 
  
