@@ -4,7 +4,7 @@ import VideoSideBar from './VideoSideBar';
 import RightsideBar from './RightsideBar';
 import CommonetSection from './CommonetSection';
 
-const Video = ({ id, url, channel, desc, like1, message, share, song, document__data }) => {
+const Video = ({ id, url, channel, desc, like1, message, share, song, document__data ,item}) => {
   //  console.log(id, url,"channel", channel, desc,"like1:", like1,"mseesage:",message, "share:",share,"song:",song, document__data,"[]")
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -39,6 +39,7 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
 
       
       <RightsideBar
+        item ={item}
         like1={document__data.length>0 &&document__data.length }
         message={document__data.length>0 && document__data.length}
         share={share}

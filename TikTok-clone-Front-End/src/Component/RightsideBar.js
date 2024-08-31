@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import "./RightsideBar.css"
 
 import { Nahdi_Gayth } from '../context/GlobalContext'
+ 
 
-const RightsideBar = ({id,url,channel,like1,message,share,song,desc,dataARRAY}) => {
+const RightsideBar = ({id,url,channel,like1,message,share,song,desc,dataARRAY,item}) => {
   console.log(dataARRAY,id)
   const [like,addLike] = useState(false)
  
@@ -77,10 +78,12 @@ const function__say1 = (id, url, channel, like, message, share, song) => {
 
   
   return (
-    <div className='videoSidebar'>
+    <div className='videoSidebar'   >
       <div className='videoSidebar__button'>
      
-      {like===false?  <span class="material-symbols-outlined" id='item' onClick={(e)=>{CombinedClickHandler(false)}}
+      {like===false?  <span class="material-symbols-outlined"  style={item === "true" ? { display: "none" } : { display: "flex" }}  id='item' onClick={(e)=>{CombinedClickHandler(false)}
+      
+    }
         
         
         
@@ -112,7 +115,7 @@ const function__say1 = (id, url, channel, like, message, share, song) => {
       </div>
 
       <div className='videoSidebar__button'>
-      <span class="material-symbols-outlined" onClick={Handel__change__the__item}>chat</span>
+      <span class="material-symbols-outlined"  style={item === "true" ? { display: "none" } : { display: "flex" }}  onClick={Handel__change__the__item}>chat</span>
         <p>{message}</p>
               </div>
 
@@ -129,7 +132,12 @@ const function__say1 = (id, url, channel, like, message, share, song) => {
   </label>
         </div>
 
-        <img src='https://img.freepik.com/vecteurs-libre/vecteur-forme-geometrique-ronde-course_53876-175080.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723420800&semt=ais_hybrid' alt='data' className='videoSidebar__button__x'/>
+        <img src='https://img.freepik.com/vecteurs-libre/vecteur-forme-geometrique-ronde-course_53876-175080.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723420800&semt=ais_hybrid' alt='data' className='videoSidebar__button__x'
+        
+        
+        style={item === "true" ? { display: "none" } : { display: "flex" }}
+        
+        />
            
  
         

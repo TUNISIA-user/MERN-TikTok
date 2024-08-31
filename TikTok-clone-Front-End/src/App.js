@@ -127,6 +127,7 @@ const App = () => {
                 Move.FLOWING.map((item,index)=> 
                 
                   <Video
+                  item = "true"
                   key={index}
                   id={item.id}
                   url={item.url}
