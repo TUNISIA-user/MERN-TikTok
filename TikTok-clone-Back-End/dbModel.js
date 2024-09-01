@@ -1,21 +1,24 @@
-import mongoose from "mongoose";
-
+// dbModel.js
+import mongoose from 'mongoose';
+import User from './userModel.js'
+// Define schemas and model
 const commentSchema = new mongoose.Schema({
-    text: String
+    text: { type: String }
 }, { timestamps: true });
 
 const tiktokSchema = new mongoose.Schema({
-    url: String,
-    channel: String,
-    desc: String,
-    song: String,
-    like1: Number,
-    message: Number,
-    share: Number,
+    url: { type: String },
+    channel: { type: String },
+    desc: { type: String },
+    song: { type: String },
+    like1: { type: Number, default: 0 },
+    message: { type: Number, default: 0 },
+    share: { type: Number, default: 0 },
     comments: [commentSchema],
-    // add new champ here 
-    img1:String ,
-    
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    img1: { type: String },
 }, { timestamps: true });
 
-export default mongoose.model('tiktokVideos', tiktokSchema);
+const Videos = mongoose.model('TikTokVideo', tiktokSchema);
+
+export default Videos  // Use named export if you're using this style
