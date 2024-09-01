@@ -1,7 +1,9 @@
 # MERN TikTok Clone 
-
+# @founder nahdi ghaith
 
 This is a full-stack TikTok clone built using the MERN stack (MongoDB, Express, React, Node.js).
+
+
 
 ## Features
 - User authentication
