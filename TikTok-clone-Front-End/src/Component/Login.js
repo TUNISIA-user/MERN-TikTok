@@ -3,8 +3,8 @@ import './Login.css';
 import { auth } from '../firebase1';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Nahdi_Gayth } from '../context/GlobalContext';
-import { useFetcher, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import axios from './axios';
 const Login = () => {
   const Nav = useNavigate();
   const Move = Nahdi_Gayth();
@@ -14,17 +14,55 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
-  const [imageURL, setImageURL] = useState("");   // this working
-  console.log(imageURL,"<======")
+  const [imageURL, setImageURL] = useState("");
+  
+ 
+  
   const handleFirebase = async (e) => {
     e.preventDefault();
+ 
+
 
     try {
+
+
+
+  const resp  =  await axios.post("/registerUser", {
+     username: email.substr(0, email.indexOf("@")), // Extract username from email
+     email: email,
+     password: password,
+     imgUrl: file || "https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg" // Default image URL
+   });
+ console.log(resp.data._id,"<====== thihs dat from format()")
+ 
+     // can i when i sent request here give me    
+//_id : "66d3c07555da3a59138705e2 "
+// from user table and the gaol of this when this user upload video no specif video 
+    
+
+
+Move.dispatch({
+  type:"SET__TOKEN__USER",
+  payloadDataINdex : {
+    token : resp.data._id ,
+    imgUrl__token  :resp.data.imgUrl
+  }
+
+})
+
+
+
+
+
+
+
+
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User signed up:', userCredential.user);
+    
       setEmail("");
       setPassword("");
-      Nav("/videos");
+     Nav("/videos");
 
       // SET__USER__FROM__FIRE__BASE 
       Move.dispatch({
@@ -35,21 +73,16 @@ const Login = () => {
           bio : null,
           
         } 
+
+      
+
       });
     } catch (error) {
       console.error('Error creating user:', error.message);
     }
   };
 
-  // const handleFileChange = (e) => {
-  //   const selectedFile = e.target.files[0];
-  //   if (selectedFile) {
-  //     const url = URL.createObjectURL(selectedFile);
-  //     setFile(selectedFile);
-  //     setImageURL(url);
-       
-  //   }
-  // };
+                   
 
   const api__data = [
     { id: 1, img_link: 'https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg' },
@@ -68,17 +101,22 @@ const Login = () => {
 
   },[])
   
-const POL__DATA = (id)=>{
+const POL__DATA = (id,file1)=>{
  
 const response  = data_apiWork?.filter((index)=>index.id===id)
 
    
-console.log(response,"888")
 setNewusser(response)
+ console.log(file1)
+ setImageURL(file1)
  
 }
  
 
+
+
+ 
+ 
   return (
     <>   
     <div className='center__container'>
@@ -118,7 +156,7 @@ setNewusser(response)
 
      
  
- {Newuser.length>0 ? Newuser.map(item=><img src={item.img_link}/>)  :  data_apiWork.map(item=><img src={item.img_link}     onClick={() => POL__DATA(item.id)} />) }
+ {Newuser.length>0 ? Newuser.map(item=><img src={item.img_link}/>)  :  data_apiWork.map(item=><img src={item.img_link}      onClick={() => POL__DATA(item.id,item.img_link)} />) }
 </div>
 
 
@@ -127,7 +165,7 @@ setNewusser(response)
           <span className="forgot-password">
             <a href="#">Forgot Password?</a>
           </span>
-          <button className="login-button" type="submit">
+          <button className="login-button" type="submit" style={{cursor:"pointer"}}>
             Create Account
           </button>
         </form>

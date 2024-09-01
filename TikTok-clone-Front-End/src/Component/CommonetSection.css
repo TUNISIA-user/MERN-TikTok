@@ -47,10 +47,12 @@
   }
   
   .avatar {
+    
     background-color: #e2e2e2; /* Equivalent to bg-gray-300 */
-    width: 3rem; /* 12 units */
-    height: 3rem; /* 12 units */
-    border-radius: 50%;
+    
+    width:40px; /* 12 units */
+    height:40px; /* 12 units */
+    border-radius: 100%;
     animation: pulse 1.5s infinite ease-in-out;
   }
   

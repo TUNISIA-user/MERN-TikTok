@@ -20,8 +20,8 @@ const CommonetSection = ({commt}) => {
     e.preventDefault();
   
     try {
-      const Token = input.substr(0, input.indexOf("/"));
-      const commentText = input.substr(input.indexOf("/") + 1);
+      const Token = Move.channel
+      const commentText = input 
   
  
       const response2 = await axios.get(`/v4/newpost/${Token}`);
@@ -48,14 +48,14 @@ const CommonetSection = ({commt}) => {
     // window.location.reload(); 
   };
   
-  useEffect(()=>{
-  
-    setnew1(commt)
-  },[])
  
   
 
  const test = Move.toogle
+ useEffect(()=>{
+  
+  setnew1(commt)
+},[])
 
   return ( 
    

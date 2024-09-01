@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Upload.css';
-import axios from './axios';
+import axios from 'axios';
+import { Nahdi_Gayth } from '../context/GlobalContext';
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -13,10 +14,13 @@ const Upload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [imge1,setimg1] = useState("")
+  const [imge1, setimg1] = useState("https://i.seadn.io/gae/Ihufw_BbfNUhFBD-XF74FlY2JjpYeUkkTdhzJy_bjEdfz0qKlLMOkxlUKxyJR7ib5dgsji9XZAMuorSX20Fw12q5XZ2LJTj2efcS?auto=format&dpr=1&w=1000");
+
+  const Move = Nahdi_Gayth();
+
   useEffect(() => {
-    console.log(selectedFile);
-  }, [selectedFile]);
+    console.log(Move);
+  }, [Move]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -30,8 +34,8 @@ const Upload = () => {
   };
 
   const validateInputs = () => {
-    if (!selectedFile || !channel || !desc || !song || isNaN(like1) || isNaN(message) || isNaN(share)) {
-      setError("Please fill all fields correctly.");
+    if (!channel || !desc || !song) {
+      setError("Please fill out all fields");
       return false;
     }
     return true;
@@ -47,20 +51,22 @@ const Upload = () => {
     setSuccess(null);
 
     try {
-      await axios.post("/v2/posts", {
-        url: selectedFile,
+      const response = await axios.post("http://localhost:5000/v2/posts", {
+        url: selectedFile || "https://videos.pexels.com/video-files/2836285/2836285-uhd_2560_1440_24fps.mp4",
         channel,
         desc,
         song,
         like1,
         message,
         share,
-        imge1 , 
-      });     
+        imge1,
+        userId: Move?.tokn_user.token || null // Ensures token is passed or null
+      });
       setSuccess('Upload successful');
+      console.log('Response:', response.data);
     } catch (error) {
       console.error('Error uploading file:', error);
-      setError('Upload failed');
+      setError('Upload failed: ' + (error.response?.data?.message || error.message));
     } finally {
       setLoading(false);
     }
@@ -120,13 +126,7 @@ const Upload = () => {
         value={share}
         onChange={(e) => setShare(Number(e.target.value))}
       />
-      <input
-        type='text'
-        placeholder='add avatar'
-        value={imge1}
-        onChange={(e) => setimg1(e.target.value)}
-      />
-
+    
       <button onClick={handleButtonClick} disabled={loading}>
         {loading ? "Loading..." : success ? success : "Send"}
       </button>

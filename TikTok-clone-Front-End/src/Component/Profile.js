@@ -19,7 +19,8 @@ function Profile() {
         <div className="profile-icons">
         <div className='uplod'>
           +
-          <h2>Uplod</h2>
+        
+          <Link to={"/profile/upload"} style={{textDecorationLine:"none",color:"white"}}>      <h2>Uplod</h2>   </Link>
          </div>
        
           <span className="material-symbols-outlined"  >send</span>

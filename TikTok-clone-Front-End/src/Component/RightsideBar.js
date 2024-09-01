@@ -66,11 +66,23 @@ const function__say1 = (id, url, channel, like, message, share, song) => {
   };
 
 
-  const Handel__change__the__item =()=>{
+  const Handel__change__the__item =(channel)=>{
+ 
+
     Move.dispatch({
+
 
       type : "SET__TOOGLE__TRUE"
     })
+
+    console.log(channel)   // put this channel to context /// that is awsome 
+ 
+    Move.dispatch({
+      type:"SET__channel",
+      payload  : channel
+    })
+
+
   }
  
    
@@ -115,7 +127,7 @@ const function__say1 = (id, url, channel, like, message, share, song) => {
       </div>
 
       <div className='videoSidebar__button'>
-      <span class="material-symbols-outlined"  style={item === "true" ? { display: "none" } : { display: "flex" }}  onClick={Handel__change__the__item}>chat</span>
+      <span class="material-symbols-outlined"  style={item === "true" ? { display: "none" } : { display: "flex" }}  onClick={()=>{Handel__change__the__item(channel)}}>chat</span>
         <p>{message}</p>
               </div>
 

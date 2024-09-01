@@ -38,13 +38,88 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/videos" element={
 
-          <>       
+      {Move.user!=null?   <Route      path="/videos" element={
+
+<>       
 
 
- 
-      
+
+
+<header className="profile-header">
+<div className="profile-logo">TikTok</div>
+
+
+<div className="profile-icons">
+
+<span class="material-symbols-outlined off">send</span>
+<span class="material-symbols-outlined off">chat_bubble</span>
+
+<Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}   src="https://picsum.photos/id/237/200/300" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+  </Link>
+
+</div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+<div className="App">  
+<div className='section__app__box'>
+<Link to={"/following"} style={{textDecorationLine:"none",color:"white"}}><h3>Following</h3></Link>
+<Link to={"/videos"} style={{textDecorationLine:"none",color:"white"}} ><h3>For Your</h3></Link>
+</div>
+  <div className="app_videos">
+   
+    {videos.map((item) => {
+        
+          return (
+            <>      
+          
+              <Video
+                key={item._id}
+                id={item._id}
+                url={item.url}
+                channel={item.channel}
+                desc={item.desc}
+                share={item.share}
+                song={item.song}
+                document__data = {item.comments}
+        
+              />
+          
+              </>
+
+          );
+          
+        })}
+        
+  
+       
+  </div>
+  
+</div>
+
+</>
+
+} />
+:<Route path='/' element={<p>404</p>}/>
+}
+
+
+<Route path="/following" element={
+
+
+              <>  
+
+                    
       <header className="profile-header">
         <div className="profile-logo">TikTok</div>
       
@@ -60,65 +135,16 @@ const App = () => {
         </div>
       </header>
       
- 
 
 
- 
- 
-
-
-
-
-
+      
           <div className="App">  
-          <div className='section__app__box'>
+           <div className='section__app__box  boxFollwing'>
           <Link to={"/following"} style={{textDecorationLine:"none",color:"white"}}><h3>Following</h3></Link>
           <Link to={"/videos"} style={{textDecorationLine:"none",color:"white"}} ><h3>For Your</h3></Link>
-        </div>
-            <div className="app_videos">
-             
-              {videos.map((item) => {
-                  
-                    return (
-                      <>      
-                    
-                        <Video
-                          key={item._id}
-                          id={item._id}
-                          url={item.url}
-                          channel={item.channel}
-                          desc={item.desc}
-                          share={item.share}
-                          song={item.song}
-                          document__data = {item.comments}
-                  
-                        />
-                    
-                        </>
-
-                    );
-                    
-                  })}
-                  
-            
-                  
-            </div>
-            
-          </div>
-        
-          </>
       
-        } />
-
-<Route path="/following" element={
-          <div className="App">  
-          <div className='section__app__box'>
-           
-          <Link to={"/following"} style={{textDecorationLine:"none",color:"white"}} ><h3>Following</h3></Link>
-          <Link to={"/videos"} style={{textDecorationLine:"none",color:"white"}}><h3>For Your</h3></Link>
-
-           
         </div>
+
             <div className="app_videos">
              
                {Move.FLOWING.length>0?
@@ -150,7 +176,8 @@ const App = () => {
                  }
 
             </div>
-          </div>
+          </div> 
+          </>
         } />
         <Route path="/login" element={<Login />} />
         <Route path='/profile/login' element ={<Profile/>} />
