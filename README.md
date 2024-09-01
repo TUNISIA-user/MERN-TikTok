@@ -1,4 +1,4 @@
- <img src ="tiktokttcloen.jpg"/>
+ <img src ="tiktokttcloen.PNG"/>
 # MERN TikTok Clone 
 # @founder nahdi ghaith
 
