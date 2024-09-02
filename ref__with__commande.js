@@ -190,6 +190,33 @@ export default CommonetSection;
 
 
 
+# 
+
+
+import Videos from './tiktokSchema.js';
+
+const videoId = "66d504428aa7ad06c329c82f"; // example video ID
+
+async function getVideoWithComments(videoId) {
+    try {
+        const video = await Videos.findById(videoId)
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
+            .exec();
+        console.log(video);
+    } catch (error) {
+        console.error('Error fetching video with comments:', error);
+    }
+}
+
+getVideoWithComments(videoId);
+
+
 
 
 
