@@ -219,8 +219,15 @@ getVideoWithComments(videoId);
 
 
 
-
-
-
+const updatedData = await Videos.updateMany(
+    { channel: req.params.channel },
+    { $push: { comments: { $each: req.body.comments } } } / 
+);
+documentation  // $each method f        
+$each exepmle : 
+const arr = [1,2,3]
+const number = 4
+const newArr = [...arr,number]
+// this aim for this $each method
 
 
