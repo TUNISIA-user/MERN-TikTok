@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./LeftBAR2.css";
 import { Nahdi_Gayth } from '../context/GlobalContext';
 
@@ -15,7 +15,11 @@ const LeftBAR2 = () => {
 
   const [activeSection, setActiveSection] = useState('videos'); // Set default to 'videos'
    const Move = Nahdi_Gayth()
-   console.log(Move.FLOWING2,"you se me ")
+ 
+   useEffect(()=>{
+    console.log(Move,"you se me ")
+
+   },[])
  
   const renderContent = () => {
     if (activeSection === 'videos') {
@@ -69,7 +73,7 @@ const LeftBAR2 = () => {
           <img
             loading="lazy"
             alt=""
-            src={Move.user?.imgUrl?Move.user.imgUrl :"https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/37088e0f4d5663fc7b1baab2317fd6cb~c5_720x720.jpeg?lk3s=a5d48078&amp;nonce=76217&amp;refresh_token=6ac8a92226bf0bfd183487e9c09400af&amp;x-expires=1724324400&amp;x-signature=tTIBkeBor74qKHSc6db1MXho2jY%3D&amp;shp=a5d48078&amp;shcp=a1d2006b"}
+            src={Move.tokn_user.imgUrl__token}
           
             className="css-1zpj2q-ImgAvatar e1e9er4e1"
           />

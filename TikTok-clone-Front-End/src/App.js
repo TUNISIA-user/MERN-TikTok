@@ -15,6 +15,10 @@ const App = () => {
   const [videos, setVideos] = useState([]);
 
   const Move = Nahdi_Gayth()
+ 
+  useEffect(()=>{
+    console.log(Move)
+  },[Move])
     
   
   useEffect(() => {
@@ -55,7 +59,7 @@ const App = () => {
 <span class="material-symbols-outlined off">send</span>
 <span class="material-symbols-outlined off">chat_bubble</span>
 
-<Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}   src="https://picsum.photos/id/237/200/300" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+<Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}   src={Move.tokn_user.imgUrl__token} class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
   </Link>
 
 </div>
@@ -78,9 +82,9 @@ const App = () => {
 </div>
   <div className="app_videos">
    
-    {videos.map((item) => {
+    {videos.map((item) =>  
         
-          return (
+       
             <>      
           
               <Video
@@ -97,9 +101,8 @@ const App = () => {
           
               </>
 
-          );
-          
-        })}
+         
+      )}
         
   
        
@@ -129,7 +132,7 @@ const App = () => {
           <span class="material-symbols-outlined off">send</span>
           <span class="material-symbols-outlined off">chat_bubble</span>
         
-          <Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}   src="https://picsum.photos/id/237/200/300" class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+          <Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}    src={Move?.tokn_user?.imgUrl__token} class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
             </Link>
         
         </div>

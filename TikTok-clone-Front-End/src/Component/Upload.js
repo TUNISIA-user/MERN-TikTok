@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Nahdi_Gayth } from '../context/GlobalContext';
 
 const Upload = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null); // this img 
   const [channel, setChannel] = useState("");
   const [desc, setDesc] = useState("");
   const [song, setSong] = useState("");
@@ -18,10 +18,7 @@ const Upload = () => {
 
   const Move = Nahdi_Gayth();
 
-  useEffect(() => {
-    console.log(Move);
-  }, [Move]);
-
+ 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -74,12 +71,18 @@ const Upload = () => {
 
   return (
     <div className="upload-container">
+
+      <div className='upload1'>  
+      
       <input
         type="file"
         accept="video/*"
         onChange={handleFileChange}
         className="upload-input"
+        id='freeLancer'
+        
       />
+      
       {selectedFile && (
         <div className="file-preview">
           <video controls className="preview-video" style={{ width: "600px", height: "300px" }}>
@@ -126,12 +129,15 @@ const Upload = () => {
         value={share}
         onChange={(e) => setShare(Number(e.target.value))}
       />
-    
+   <br/>  <br/>
       <button onClick={handleButtonClick} disabled={loading}>
         {loading ? "Loading..." : success ? success : "Send"}
       </button>
       {error && <p className="error-message">{error}</p>}
+      </div>
+
     </div>
+    
   );
 };
 

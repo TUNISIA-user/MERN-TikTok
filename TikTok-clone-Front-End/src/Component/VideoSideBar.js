@@ -1,12 +1,13 @@
 import React from 'react'
 import "./VideoSideBar.css"
- 
+import { Nahdi_Gayth } from '../context/GlobalContext'
 
 const   VideoSideBar = ({channel,desc,song}) => {
+  const Move = Nahdi_Gayth()
   return (
     <div className='videoSideBar'>
         <div className='videoFooter__text'>
-            <h3>@{channel}</h3>
+            <h3>@ {Move.user.email} ....{channel}</h3>
             <p>{desc}</p>
 
             <div className='videoFooter__ticker'>

@@ -17,11 +17,13 @@ const CardCommt = ({commet,username,img,time}) => {
   return (   
     <div class="container1">
 <div className="avatar">
-  <img src={Move?.user?.imgUrl || img} alt="User Avatar" />
+  <img src={Move?.tokn_user?.imgUrl__token || img} alt="User Avatar" />
 </div>
 
     <div class="text-container">
-      <div class="text-line short">{Move?.user?.email || "Guest"}</div>
+      {/* <div class="text-line short">{Move?.user?.email || "Guest"}</div> */}
+      <div class="text-line short">{"anonymous "}</div>
+
       <div class="text-line long">
              {commet}
       </div>

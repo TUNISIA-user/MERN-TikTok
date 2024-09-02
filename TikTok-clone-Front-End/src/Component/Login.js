@@ -31,7 +31,7 @@ const Login = () => {
      username: email.substr(0, email.indexOf("@")), // Extract username from email
      email: email,
      password: password,
-     imgUrl: file || "https://img.freepik.com/premium-vector/character-guy-avatar-internet_24877-17032.jpg" // Default image URL
+     imgUrl: imageURL
    });
  console.log(resp.data._id,"<====== thihs dat from format()")
  
@@ -59,7 +59,7 @@ Move.dispatch({
 
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    
+     console.log(userCredential , "<=>")
       setEmail("");
       setPassword("");
      Nav("/videos");
