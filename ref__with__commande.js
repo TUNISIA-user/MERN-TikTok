@@ -238,4 +238,4 @@ const newArr = [...arr,number]
 
 label htmlFor='file'>Upload an image</label>
 
-
+npm i react-toastify   its library show  eroor
