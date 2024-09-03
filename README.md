@@ -86,6 +86,56 @@ Once you’ve created and saved your `README.md` file:
 
 [![Watch the video](https://img.youtube.com/vi/2IbRtjez6ag/maxresdefault.jpg)](https://www.youtube.com/watch?v=2IbRtjez6ag)
 
+# doc for firebase
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDxtu77aEU0FLm58CcNPeSxX1AK3aU5zxM",
+    authDomain: "reactchat-35c09.firebaseapp.com",
+    projectId: "reactchat-35c09",
+    storageBucket: "reactchat-35c09.appspot.com",
+    messagingSenderId: "382321958499",
+    appId: "1:382321958499:web:9afa21680adffca47b2256",
+    measurementId: "G-SBNMCLF2TP"
+  };
+  
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app); // Pass `app` to `getAuth`
+export const db = getFirestore(app); // Pass `app` to `getFirestore`
+export const storage = getStorage(app); // Pass `app` to `getStorage`
+
+
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow read and write access to authenticated users on their own documents
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow read and write access to authenticated users on their chat documents
+    match /userschats/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow reads on other public collections (e.g., for messages that might be public)
+    match /public/{document=**} {
+      allow read: if request.auth != null;
+    }
+  }
+}
+
+
+
+
 
 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠒⠋⠉⠭⠓⠲⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
