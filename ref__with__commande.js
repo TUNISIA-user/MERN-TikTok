@@ -229,5 +229,13 @@ const arr = [1,2,3]
 const number = 4
 const newArr = [...arr,number]
 // this aim for this $each method
+// this for sommoth the comments
+
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });      // the awsome thing 
+  }, []);
+
+
 
 
