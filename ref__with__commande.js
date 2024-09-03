@@ -239,3 +239,19 @@ const newArr = [...arr,number]
 label htmlFor='file'>Upload an image</label>
 
 npm i react-toastify   its library show  eroor
+
+
+
+.adduser{
+      width: max-content;
+      height: max-content;
+      padding: 30px;
+     background-color: rgba(17,25,40,0.5);
+     border-radius: 10px;
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     margin: auto;
+} to fix something in center
