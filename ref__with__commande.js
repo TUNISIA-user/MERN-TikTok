@@ -236,6 +236,6 @@ const newArr = [...arr,number]
     endRef.current?.scrollIntoView({ behavior: "smooth" });      // the awsome thing 
   }, []);
 
-
+label htmlFor='file'>Upload an image</label>
 
 
