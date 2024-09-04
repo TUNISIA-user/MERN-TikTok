@@ -255,3 +255,20 @@ npm i react-toastify   its library show  eroor
      right: 0;
      margin: auto;
 } to fix something in center
+
+
+
+
+
+
+
+fire base help
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
