@@ -133,6 +133,36 @@ service cloud.firestore {
   }
 }
 
+#Firebase Auth
+const admin = require('firebase-admin');
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(), // or use a specific service account key
+});
+
+// Verify ID token
+const verifyToken = async (idToken) => {
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    return decodedToken;
+  } catch (error) {
+    throw new Error('Invalid token');
+  }
+};
+
+
+#FirebaseStore
+
+const admin = require('firebase-admin');
+const db = admin.firestore();
+
+// Add a document
+const addUser = async (userId, data) => {
+  try {
+    await db.collection('users').doc(userId).set(data);
+  } catch (error) {
+    console.error('Error adding document:', error);
+  }
+};
 
 
 
