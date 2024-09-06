@@ -7,7 +7,7 @@ const   VideoSideBar = ({channel,desc,song}) => {
   return (
     <div className='videoSideBar'>
         <div className='videoFooter__text'>
-            <h3>@ {Move.user.email} ....{channel}</h3>
+            <h3>@ {Move.user?.email} </h3>
             <p>{desc}</p>
 
             <div className='videoFooter__ticker'>

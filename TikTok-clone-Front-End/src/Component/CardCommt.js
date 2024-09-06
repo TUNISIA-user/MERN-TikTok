@@ -6,9 +6,9 @@ const CardCommt = ({commet,username,img,time}) => {
  
      const Move = Nahdi_Gayth()
  
-     const hours = time.substr(11, 2);  
-     const minutes = time.substr(14, 2);  
-     const timeString = `${hours}:${minutes}`;
+      const hours = 10      // shoul be call reall time here
+      const minutes = 22
+      const timeString = `${hours}:${minutes}`;
 
  
 

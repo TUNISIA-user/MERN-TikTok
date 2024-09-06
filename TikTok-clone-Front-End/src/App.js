@@ -9,6 +9,8 @@ import Profile from './Component/Profile';
 import CommonetSection from './Component/CommonetSection';
 import './Component/Profile.css';
 import Upload from './Component/Upload';
+import FIRSTVIEW from './FIRST__VIEW/FIRSTVIEW';
+import Spinner from './FIRST__VIEW/Spinner';
 
 
 const App = () => {
@@ -43,7 +45,7 @@ const App = () => {
     <Router>
       <Routes>
 
-      {Move.user!=null?   <Route      path="/videos" element={
+       <Route      path="/videos" element={
 
 <>       
 
@@ -59,7 +61,16 @@ const App = () => {
 <span class="material-symbols-outlined off">send</span>
 <span class="material-symbols-outlined off">chat_bubble</span>
 
-<Link to={"/profile/login"}><img style={{height:"30px",width:"30px",borderRadius:"100px"}}   src={Move.tokn_user.imgUrl__token} class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+<Link to={"/profile/login"}>
+
+  <img
+    style={{ height: "30px", width: "30px", borderRadius: "100px" }}
+    src={Move?.tokn_user?.imgUrl__token 
+         ? Move.tokn_user.imgUrl__token 
+         : "https://avatars.githubusercontent.com/u/121437369?v=4"}
+    alt="User Avatar"
+    class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+ 
   </Link>
 
 </div>
@@ -113,8 +124,8 @@ const App = () => {
 </>
 
 } />
-:<Route path='/' element={<p>404</p>}/>
-}
+ 
+ 
 
 
 <Route path="/following" element={
@@ -185,8 +196,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path='/profile/login' element ={<Profile/>} />
         <Route path='/profile/upload' element ={<Upload/>} />
- 
+         
         
+        <Route path='/Spinner' element ={<Spinner/>} />
+        <Route path='/' element ={<FIRSTVIEW/>} />
        
 
       </Routes>

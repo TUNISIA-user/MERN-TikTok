@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Upload.css';
-import axios from 'axios';
+import axios from './axios';
 import { Nahdi_Gayth } from '../context/GlobalContext';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+  
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null); // this img 
   const [channel, setChannel] = useState("");
@@ -17,7 +19,9 @@ const Upload = () => {
   const [imge1, setimg1] = useState("https://i.seadn.io/gae/Ihufw_BbfNUhFBD-XF74FlY2JjpYeUkkTdhzJy_bjEdfz0qKlLMOkxlUKxyJR7ib5dgsji9XZAMuorSX20Fw12q5XZ2LJTj2efcS?auto=format&dpr=1&w=1000");
 
   const Move = Nahdi_Gayth();
-
+ useEffect(()=>{
+  console.log(Move.tokn_user.token,"uplod.js")
+ },[])
  
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -41,26 +45,22 @@ const Upload = () => {
   const handleButtonClick = async (e) => {
     e.preventDefault();
 
-    if (!validateInputs()) return;
+    // if (!validateInputs()) return;
 
     setLoading(true);
     setError(null);
-    setSuccess(null);
-
+    setSuccess(null);   
+   
     try {
-      const response = await axios.post("http://localhost:5000/v2/posts", {
-        url: selectedFile || "https://videos.pexels.com/video-files/2836285/2836285-uhd_2560_1440_24fps.mp4",
+      const response = await axios.post(`v2/posts/${Move.tokn_user.token}`, {
+        url:   "https://videos.pexels.com/video-files/2836285/2836285-uhd_2560_1440_24fps.mp4",
         channel,
-        desc,
-        song,
-        like1,
-        message,
-        share,
-        imge1,
-        userId: Move?.tokn_user.token || null // Ensures token is passed or null
+        
+        user:Move.tokn_user.token,
       });
       setSuccess('Upload successful');
       console.log('Response:', response.data);
+      toast.success("Upload successful")
     } catch (error) {
       console.error('Error uploading file:', error);
       setError('Upload failed: ' + (error.response?.data?.message || error.message));
@@ -133,6 +133,9 @@ const Upload = () => {
       <button onClick={handleButtonClick} disabled={loading}>
         {loading ? "Loading..." : success ? success : "Send"}
       </button>
+      <ToastContainer />
+
+
       {error && <p className="error-message">{error}</p>}
       </div>
 

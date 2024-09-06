@@ -14,41 +14,91 @@ const CommonetSection = ({commt}) => {
   const [new1,setnew1] = useState([])   
  
 
- 
+  const fetahcData =async ()=>{
+    const getData  = await axios.get('/v2/posts');
+    console.log(getData.data,"<= response all data here")
+    const FetchCommenet = getData.data.flatMap((item)=>item.comments)
+    console.log(FetchCommenet)      
+  }
+  useEffect(()=>{
+    fetahcData()
+     
+  },[])
 
-  const handleData = async (e) => {
-    e.preventDefault();
-  
-    try {
-      const Token = Move.channel
-      const commentText = input 
-  
- 
-      const response2 = await axios.get(`/v4/newpost/${Token}`);
-      const allComments = response2.data.flatMap(item => item.comments || []);
-  
-      console.log(allComments)
-    
 
-    
-      const response = await axios.put(`/v3/posts/${Token}`, {
-        comments: [...allComments,{ text: commentText } ]
-      });
+//   const handleData = async (e) => {
+//     e.preventDefault();
   
-      const finall__result = await axios.get(`/v4/newpost/${Token}`);
-      const x = finall__result.data.flatMap(item => item.comments || []);
-    
-      setactullay(x)
+//     try {
+//         const Token = Move.channel;  
+//         const commentText = input;   
+//         const userId = Move.tokn_user.token       // i add this because like im told you when user create his acount save his object id 
+        
+
+//         // Fetch existing comments for the channel
+//         const response2 = await axios.get(`/v4/newpost/${Token}`);
+//         const allComments = response2.data.flatMap(item => item.comments || []);
+//         console.log("Existing comments:", allComments);
+
+//         // Add the new comment
+//         const response = await axios.put(`/v3/posts/${Token}`, {
+//             comments: [...allComments, { text: commentText, user: userId }] // Include user ID in comment  here push the data
+//         });
+
+//         // Fetch the updated comments
+//         const finall__result = await axios.get(`/v4/newpost/${Token}`);
+//         const updatedComments = finall__result.data.flatMap(item => item.comments || []);
+//         setactullay(updatedComments); // Update state with the latest comments
+
+//     } catch (error) {
+//         console.error("Error updating comment:", error);
+//         // You might want to show a user-friendly message here
+//     }
+// };
+
+
+
+
+
+
+
+
+      const handleData = async (e) => {
+        e.preventDefault(); 
+        
+        try {
+          const Token = Move.channel
+          const commentText = input 
+          const userId = Move.tokn_user.token   
+          console.log(Token,commentText,userId,"<=>FILE<=>")
+          const response2 = await axios.get(`/v4/newpost/${Token}`);
+            
+          const allComments = response2.data.flatMap(item => item.comments || []);
+        
+          console.log(allComments)
+        
+
+        
+         const response = await axios.put(`/v3/posts/${Token}`, {
+           comments: [...allComments,{ text: commentText ,user :userId } ]
+         });
+      
+         const finall__result = await axios.get(`/v4/newpost/${Token}`);
+         const x = finall__result.data.flatMap(item => item.comments || []);
+        
+         setactullay(x)
+          
+      
+       } catch (error) {
+         console.error("Error updating comment:", error);
+        
+       }
+    //  window.location.reload(); 
+     }; 
       
   
-    } catch (error) {
-      console.error("Error updating comment:", error);
+
     
-    }
-    // window.location.reload(); 
-  };
-  
- 
   
 
  const test = Move.toogle

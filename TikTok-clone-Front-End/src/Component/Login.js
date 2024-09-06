@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Login.css';
 import { auth } from '../firebase1';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword    } from 'firebase/auth';
 import { Nahdi_Gayth } from '../context/GlobalContext';
 import { useNavigate } from "react-router-dom";
 import axios from './axios';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Login = () => {
   const Nav = useNavigate();
   const Move = Nahdi_Gayth();
@@ -33,19 +38,17 @@ const Login = () => {
      password: password,
      imgUrl: imageURL
    });
- console.log(resp.data._id,"<====== thihs dat from format()")
- 
-     // can i when i sent request here give me    
-//_id : "66d3c07555da3a59138705e2 "
-// from user table and the gaol of this when this user upload video no specif video 
-    
+   toast.success("yeah neaga this working")
+ console.log("this for reponse",resp)
+  
 
 
 Move.dispatch({
   type:"SET__TOKEN__USER",
   payloadDataINdex : {
     token : resp.data._id ,
-    imgUrl__token  :resp.data.imgUrl
+    imgUrl__token  :resp.data.imgUrl,
+    name__user__token : resp.data.username
   }
 
 })
@@ -59,6 +62,7 @@ Move.dispatch({
 
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
      console.log(userCredential , "<=>")
       setEmail("");
       setPassword("");
@@ -74,9 +78,12 @@ Move.dispatch({
           
         } 
 
-      
+        
 
       });
+ 
+      
+      
     } catch (error) {
       console.error('Error creating user:', error.message);
     }
@@ -210,7 +217,17 @@ setNewusser(response)
       </div>
     </div>
 
-
+    <ToastContainer
+   position="top-right" // Position of the toast notifications
+   autoClose={5000} // Auto-close duration in milliseconds
+   hideProgressBar={false} // Show or hide progress bar
+   newestOnTop={false} // Show newest toast on top
+   closeOnClick // Close on click
+   rtl={false} // Right-to-left layout
+   pauseOnFocusLoss // Pause on focus loss
+   draggable // Make draggable
+   pauseOnHover // Pause on hover
+ />
  
     </>
 
