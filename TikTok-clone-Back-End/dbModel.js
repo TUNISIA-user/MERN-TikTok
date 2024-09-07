@@ -24,6 +24,7 @@ const tiktokSchema = new mongoose.Schema({
     }],
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     img1: { type: String },
+    
 }, { timestamps: true });
 
 const Videos = mongoose.model('TikTokVideo', tiktokSchema);

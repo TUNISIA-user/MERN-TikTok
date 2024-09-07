@@ -9,7 +9,7 @@ import asyncHandler from "express-async-handler"
 // App configuration
 const app = express();
 const PORT = 5000;
-
+ 
 // Database connection
 const connectionUrl = 'mongodb+srv://admin:rZ3ai6sNuXDZVaAu@cluster0.kuql1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(connectionUrl, {
@@ -251,11 +251,12 @@ app.post("/v2/posts/:id", async (req, res) => {
  
 
 
-app.put("/v3/posts/:id", asyncHandler(async (req, res, next) => {
+app.put("/v3/posts/:channel", asyncHandler(async (req, res, next) => {
     try {
         // Find the video by ID
-        const video = await Videos.findById(req.params.id);
-
+       // const video = await Videos.findById(req.params.id); // i wanna find by channel here plz 
+        const video = await Videos.findOne({ channel: req.params.channel });
+        console.log(video)
         // Check if the video exists
         if (!video) {
             res.status(404);
@@ -263,11 +264,11 @@ app.put("/v3/posts/:id", asyncHandler(async (req, res, next) => {
         }
 
         // Extract the comment text and user ID from the request body
-        const { text, user } = req.body;
+        const { text, user } = req.body;                    
 
-        // Update the video by adding the new comment
+        // Update the video by adding the new comment       
         const updatedData = await Videos.updateOne(
-            { _id: req.params.id },
+            { channel: req.params.channel },
             { $push: { comments: { text : text, user: user, createdAt: new Date() } } }
             
         );
@@ -327,8 +328,69 @@ app.get('/commentUser', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+ 
+
+app.get("/bioUsers", async (req, res) => {
+    try {
+        const data = await User.find();
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error", error: err });
+        console.error(`Error fetching data: ${err}`);
+    }
+});
 
 
+app.post("/biosUsers/Update/:id", async (req, res) => {
+    try {
+      // Find the user by ID
+      const BioResponse = await User.findById(req.params.id);
+      
+      // If no user is found, return a 404 response
+      if (!BioResponse) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Assuming 'text' is provided in the request body
+      const { text } = req.body;
+      
+      // If text is missing, return a 400 Bad Request
+      if (!text) {
+        return res.status(400).json({ message: "Text is required to update bio" });
+      }
+  
+      // Update the 'bio' field directly in the 'Videos' collection
+      const updatedData = await User.updateOne(
+        { _id: req.params.id }, // Find video by ID
+        { $set: { bio: text, createdAt: new Date() } } // Update bio and createdAt
+      );
+  
+      // If no document is updated, return a 404 response
+      if (updatedData.nModified === 0) {
+        return res.status(404).json({ message: "Video not found or no changes made" });
+      }
+  
+      // If everything is successful, send a 200 response
+      res.status(200).json({ message: 'Bio updated successfully', updatedData });
+  
+    } catch (error) {
+      console.error(`Error: ${error}`);
+      
+      // Return a 500 error if something goes wrong
+      res.status(500).json({ message: error.message });
+    }
+  });
+  
+
+  app.get("/bioUsers/:id", async (req, res) => {
+    try {
+        const data = await User.findById(req.params.id);
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error", error: err });
+        console.error(`Error fetching data: ${err}`);
+    }
+});
 
 
 // Start the server
