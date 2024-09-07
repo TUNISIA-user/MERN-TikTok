@@ -1,26 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import "./LeftBAR2.css";
 import { Nahdi_Gayth } from '../context/GlobalContext';
-
-
+import axios from "./axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const LeftBAR2 = () => {
 
   const [open,setopen] = useState(false)
   const [updateUserName,setUpdateUserName] = useState("")
   const [updatename,setupdatename] = useState("")
   const [updatebio,setupdatebio] =  useState("")
+  const Move = Nahdi_Gayth()
   
+  const [response,setresponse] = useState([])
+  const [CommentUser,setCommentUser] = useState("")
+  const reStore = async()=>{
+    const response = await axios("/bioUsers")
+    
+    setresponse(response.data)
+    console.log(response.data,"<==",Move.tokn_user.name__user__token)
+   const res =  response?.data.filter((item)=>item.username === Move.tokn_user.name__user__token)
+   
+   const Last__data = res[0].bio
+   
+   setCommentUser(Last__data)
+   console.log(CommentUser)
+  }
+  useEffect(()=>{
+    reStore()
+    
+  },[])
+
+
+
 
 
 
   const [activeSection, setActiveSection] = useState('videos'); // Set default to 'videos'
-   const Move = Nahdi_Gayth()
- 
-   useEffect(()=>{
-    console.log(Move,"you se me ")
-
-   },[])
- 
+  
   const renderContent = () => {
     if (activeSection === 'videos') {
       return <div>add videos</div>;
@@ -33,12 +50,10 @@ const LeftBAR2 = () => {
                       
                       <video 
                       className='video__player' 
-                      width="400" 
-                      height="515" 
-                      
+             
                       autoPlay
                       src={item.url}
-                      muted  
+                   
                       loop  
                       playsInline   
                       
@@ -52,19 +67,32 @@ const LeftBAR2 = () => {
   };
 
 
- const Handel__click = (e)=>{
+ const Handel__click = async(e)=>{
   e.preventDefault();
  
-  Move.dispatch({
-    type : "UPDATE__USER" ,
-    paylod :{
+  // Move.dispatch({
+  //   type : "UPDATE__USER" ,
+  //   paylod :{
       
-      email : updatename,
-      bio : updatebio,
+  //     email : updatename,
+  //     bio : "updatebio",
 
-    }
-  })
+  //   }
+  // })
+  console.log(updatebio,Move.tokn_user.token)
+  try{
+    const responseData = await axios.post(`/biosUsers/Update/${Move.tokn_user.token}`,{
+       text :updatebio.trim()
+    })
 
+    setCommentUser(updatebio);
+
+   toast.success("the bio Modfied success")
+  }
+
+  catch(eroor){
+    console.log(`this eror by ${eroor}`)
+  }
  }
   return (
     <div className='LeftBAR2'>
@@ -104,7 +132,7 @@ const LeftBAR2 = () => {
       </div>
 
       <div className='bio__tiktok__mern__stack'> 
-      <h2>{Move?.user?.bio ? Move.user.bio : "no comment yet "}</h2>
+      <h2>{CommentUser?CommentUser : "no comment yet "}</h2>
 
       </div>
 
@@ -141,9 +169,9 @@ const LeftBAR2 = () => {
       
           
          
-          <label for="name"> name</label>
+          <label for="name"> hello {Move.tokn_user.name__user__token}</label>
           
-          <input type="text" id="name" name="name"  placeholder='Change name' onChange={(e)=>setupdatename(e.target.value)}/>
+          {/* <input type="text" id="name" name="name"  placeholder='Change name' onChange={(e)=>setupdatename(e.target.value)}/> */}
         </div>
         <div class="form-group">
           <label for="textarea">Set bio ... ?</label>
@@ -154,7 +182,7 @@ const LeftBAR2 = () => {
     </div>
         </div>
       </div>
-   
+      <ToastContainer />
     </div>
  
   );

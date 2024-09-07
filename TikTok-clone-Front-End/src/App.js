@@ -26,8 +26,8 @@ const App = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/v2/posts');
-         
+        const response = await axios.get('/commentUser');
+        
         setVideos(response.data);   // this to put data in hooks 
         
       } catch (error) {
@@ -39,7 +39,9 @@ const App = () => {
     
   
   }, []);
- 
+  useEffect(()=>{
+    console.log("hello")
+  },[])
  
   return (
     <Router>

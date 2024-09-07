@@ -196,10 +196,11 @@
     flex-wrap: wrap;  
 }
   .card__favorite video{
-    width: 18%;
+    width: 50%;
     height: 200px;
     margin-top: 3px;
-    margin-left: 3px;
+    margin-left: 10 px;
+    
   }
 
   .update__card{

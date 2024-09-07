@@ -36,10 +36,12 @@ const Login = () => {
      username: email.substr(0, email.indexOf("@")), // Extract username from email
      email: email,
      password: password,
-     imgUrl: imageURL
+     imgUrl: imageURL,
+     bio :"",
+     
    });
-   toast.success("yeah neaga this working")
- console.log("this for reponse",resp)
+   toast.success("success 100%")
+   console.log("this for reponse",resp)
   
 
 
@@ -66,7 +68,7 @@ Move.dispatch({
      console.log(userCredential , "<=>")
       setEmail("");
       setPassword("");
-     Nav("/videos");
+      Nav("/videos");
 
       // SET__USER__FROM__FIRE__BASE 
       Move.dispatch({
@@ -150,14 +152,7 @@ setNewusser(response)
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <input
-            className="input"
-            type="file"
-            name="file"
-            id="file"
-            onChange={handleFileChange}
-          /> */}
-
+ 
 
         <div className='copy'>
 

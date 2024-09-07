@@ -5,7 +5,7 @@ import { Nahdi_Gayth } from '../context/GlobalContext'
  
 
 const RightsideBar = ({id,url,channel,like1,message,share,song,desc,dataARRAY,item}) => {
-  console.log(dataARRAY,id)
+ 
   const [like,addLike] = useState(false)
  
   const Handel =()=>{

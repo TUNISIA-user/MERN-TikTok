@@ -23,6 +23,10 @@ const Upload = () => {
   console.log(Move.tokn_user.token,"uplod.js")
  },[])
  
+ function generateId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -35,10 +39,7 @@ const Upload = () => {
   };
 
   const validateInputs = () => {
-    if (!channel || !desc || !song) {
-      setError("Please fill out all fields");
-      return false;
-    }
+ 
     return true;
   };
 
@@ -53,8 +54,8 @@ const Upload = () => {
    
     try {
       const response = await axios.post(`v2/posts/${Move.tokn_user.token}`, {
-        url:   "https://videos.pexels.com/video-files/2836285/2836285-uhd_2560_1440_24fps.mp4",
-        channel,
+        url:selectedFile,
+        channel:generateId(),
         
         user:Move.tokn_user.token,
       });

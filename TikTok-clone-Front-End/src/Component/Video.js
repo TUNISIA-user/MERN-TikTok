@@ -8,6 +8,38 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
+  useEffect(() => {
+    // Create an IntersectionObserver instance
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Element is in view
+          if (playing) {
+            videoRef.current.play();
+          }
+        } else {
+          // Element is out of view
+          if (playing) {
+            videoRef?.current.pause();
+          }
+        }
+      },
+      { threshold: 0.5 } // Trigger when at least 50% of the video is in view
+    );
+
+    // Observe the video element
+    if (videoRef.current) {
+      observer?.observe(videoRef.current);
+    }
+
+    // Cleanup observer on unmount
+    return () => {
+      if (videoRef.current) {
+        observer?.unobserve(videoRef.current);
+      }
+    };
+  }, [playing]);
+
   const handleVideoPress = () => {
     if (playing) {
       videoRef.current.pause();
@@ -17,38 +49,6 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
       setPlaying(true);
     }
   };
-  console.log(playing)
-
-  // useEffect(() => {
-  //   const videoElement = videoRef.current;
-
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (entry.isIntersecting) {
-  //         if (!playing) {
-  //           videoElement.play();
-  //           setPlaying(true);
-  //         }
-  //       } else {
-  //         if (playing) {
-  //           videoElement.pause();
-  //           setPlaying(false);
-  //         }
-  //       }
-  //     },
-  //     { threshold: 0.5 } // Adjust this threshold as needed
-  //   );
-
-  //   if (videoElement) {
-  //     observer.observe(videoElement);
-  //   }
-
-  //   return () => {
-  //     if (videoElement) {
-  //       observer.unobserve(videoElement);
-  //     }
-  //   };
-  // }, [playing]);
 
   return (
     <>
@@ -61,6 +61,7 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
           onClick={handleVideoPress}
           src={url}
           playsInline
+          loop
         />
         <VideoSideBar channel={channel} desc={desc} song={song} />
         <RightsideBar
@@ -82,3 +83,4 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
 };
 
 export default Video;
+    

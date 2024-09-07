@@ -5,7 +5,7 @@ import { Nahdi_Gayth } from '../context/GlobalContext';
 import axios  from './axios';
 
 const CommonetSection = ({commt}) => {
- 
+  
  
   const Move = Nahdi_Gayth()
 
@@ -15,49 +15,16 @@ const CommonetSection = ({commt}) => {
  
 
   const fetahcData =async ()=>{
-    const getData  = await axios.get('/v2/posts');
-    console.log(getData.data,"<= response all data here")
+    const getData  = await axios.get('/commentUser');
+
     const FetchCommenet = getData.data.flatMap((item)=>item.comments)
-    console.log(FetchCommenet)      
+    console.log(FetchCommenet,"all data here")      
+     
   }
   useEffect(()=>{
     fetahcData()
      
   },[])
-
-
-//   const handleData = async (e) => {
-//     e.preventDefault();
-  
-//     try {
-//         const Token = Move.channel;  
-//         const commentText = input;   
-//         const userId = Move.tokn_user.token       // i add this because like im told you when user create his acount save his object id 
-        
-
-//         // Fetch existing comments for the channel
-//         const response2 = await axios.get(`/v4/newpost/${Token}`);
-//         const allComments = response2.data.flatMap(item => item.comments || []);
-//         console.log("Existing comments:", allComments);
-
-//         // Add the new comment
-//         const response = await axios.put(`/v3/posts/${Token}`, {
-//             comments: [...allComments, { text: commentText, user: userId }] // Include user ID in comment  here push the data
-//         });
-
-//         // Fetch the updated comments
-//         const finall__result = await axios.get(`/v4/newpost/${Token}`);
-//         const updatedComments = finall__result.data.flatMap(item => item.comments || []);
-//         setactullay(updatedComments); // Update state with the latest comments
-
-//     } catch (error) {
-//         console.error("Error updating comment:", error);
-//         // You might want to show a user-friendly message here
-//     }
-// };
-
-
-
 
 
 
@@ -68,26 +35,22 @@ const CommonetSection = ({commt}) => {
         
         try {
           const Token = Move.channel
+          console.log(Token)
           const commentText = input 
           const userId = Move.tokn_user.token   
-          console.log(Token,commentText,userId,"<=>FILE<=>")
-          const response2 = await axios.get(`/v4/newpost/${Token}`);
-            
-          const allComments = response2.data.flatMap(item => item.comments || []);
-        
-          console.log(allComments)
+          console.log(Token,commentText,userId,"<=>FILE<=>") // this awsome idea and then you should be add to new arr for ensure this commande 
+          // update when you post something
+          
+             
         
 
         
-         const response = await axios.put(`/v3/posts/${Token}`, {
-           comments: [...allComments,{ text: commentText ,user :userId } ]
-         });
-      
-         const finall__result = await axios.get(`/v4/newpost/${Token}`);
-         const x = finall__result.data.flatMap(item => item.comments || []);
-        
-         setactullay(x)
-          
+          const response = await axios.put(`/v3/posts/${Token}`, {
+            text: commentText,
+            user: userId
+        });
+        console.log(response)
+         
       
        } catch (error) {
          console.error("Error updating comment:", error);
@@ -105,6 +68,7 @@ const CommonetSection = ({commt}) => {
  useEffect(()=>{
   
   setnew1(commt)
+  
 },[])
 
   return ( 
@@ -149,24 +113,13 @@ const CommonetSection = ({commt}) => {
 
 
        <div className='CommonetSection__insde'> 
-      {actullay && actullay.length > 0 ? (
-        actullay.map((comment, index) => (
-          <CardCommt
-            key={index}   
-            commet={comment.text || "No Comment Text"}  
-            username={ "Anonymous"} // Adjust based on your data structure
-            img={'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg'}
-            time={comment.createdAt}
-          />
-          
-        ))
-      ) : (
+      
         <p>{new1.length>0 ? 
             new1.map((item,index)=>
               <CardCommt
             key={index}   
             commet={item.text || "No Comment Text"}  
-            username={ "Anonymous"} // Adjust based on your data structure
+            username={item.user?.username} // Adjust based on your data structure
             img={'https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg'}
             time={item.createdAt}
           />
@@ -193,7 +146,7 @@ const CommonetSection = ({commt}) => {
       
           
           }</p>
-      )}
+     
 </div>
  
     </div>

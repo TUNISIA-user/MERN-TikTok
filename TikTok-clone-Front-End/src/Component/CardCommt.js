@@ -22,7 +22,7 @@ const CardCommt = ({commet,username,img,time}) => {
 
     <div class="text-container">
       {/* <div class="text-line short">{Move?.user?.email || "Guest"}</div> */}
-      <div class="text-line short">{"anonymous "}</div>
+      <div class="text-line short">{username}</div>
 
       <div class="text-line long">
              {commet}
