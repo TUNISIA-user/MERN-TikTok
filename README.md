@@ -1,3 +1,6 @@
+# Task : Profile when click his personalle picture git his profile 
+# Task : Can users talk with each eather inside this app i did it 
+
 <img src="singup.PNG"/> 
  <img src ="adduser.PNG"/>
  
