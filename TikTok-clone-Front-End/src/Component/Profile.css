@@ -121,4 +121,11 @@
   }
     
   }
- 
+ .profile-icons{
+  span{
+cursor: pointer;
+  }
+  span:hover{
+   font-size: 30px;
+  }
+ }

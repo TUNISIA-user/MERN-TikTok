@@ -70,3 +70,57 @@ font-weight: 630;    cursor: pointer;
  .button2:hover{
     background-color:#e2dede;
  }
+
+
+ .users__container{
+   
+    width: 100%;
+    height: 140px;
+    position: absolute;
+   
+    bottom:  0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+ }
+
+ .users__container{
+    text-align: center;
+
+ }
+
+ 
+.image__container__videos__users {
+
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 100%;
+      
+      /* Adding rotation animation */
+      animation: rotate-image 3s infinite linear; /* Rotate continuously */
+    }
+  }
+  
+  .userInsideContainer {
+  
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Keyframes for the rotation animation */
+  @keyframes rotate-image {
+    from {
+      transform: rotate(0deg); /* Starting point */
+    }
+    to {
+      transform: rotate(360deg); /* Complete one full rotation */
+    }
+  }
+  

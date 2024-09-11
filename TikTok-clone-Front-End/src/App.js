@@ -11,18 +11,23 @@ import './Component/Profile.css';
 import Upload from './Component/Upload';
 import FIRSTVIEW from './FIRST__VIEW/FIRSTVIEW';
 import Spinner from './FIRST__VIEW/Spinner';
-
-
+import RecupAccount from "./Component/RecupAccount"
+import { useNavigate } from 'react-router-dom';
+import RealTimeChat from './Real__Time__App/RealTimeChat';
 const App = () => {
   const [videos, setVideos] = useState([]);
-
-  const Move = Nahdi_Gayth()
  
+  const Move = Nahdi_Gayth()
+  
   useEffect(()=>{
     console.log(Move)
   },[Move])
     
+  const HandelLogoutAndClearLocalStorgeWithReact = ()=>{
+    localStorage.clear();
+    //alert('LocalStorage has been cleared!');
   
+  }
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -39,9 +44,7 @@ const App = () => {
     
   
   }, []);
-  useEffect(()=>{
-    console.log("hello")
-  },[])
+  
  
   return (
     <Router>
@@ -60,20 +63,22 @@ const App = () => {
 
 <div className="profile-icons">
 
-<span class="material-symbols-outlined off">send</span>
-<span class="material-symbols-outlined off">chat_bubble</span>
+<Link to={"/"}> <span className="material-symbols-outlined off" onClick={HandelLogoutAndClearLocalStorgeWithReact}  >logout</span> </Link>
+<span className="material-symbols-outlined off">send</span>
+<span className="material-symbols-outlined off">chat_bubble</span>
 
-<Link to={"/profile/login"}>
-
-  <img
-    style={{ height: "30px", width: "30px", borderRadius: "100px" }}
-    src={Move?.tokn_user?.imgUrl__token 
-         ? Move.tokn_user.imgUrl__token 
-         : "https://avatars.githubusercontent.com/u/121437369?v=4"}
-    alt="User Avatar"
-    class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
  
-  </Link>
+  <Link to={"/profile/login"}>
+
+    <img
+      style={{ height: "30px", width: "30px", borderRadius: "100px" }}
+      src={Move?.tokn_user?.imgUrl__token
+          ? Move.tokn_user.imgUrl__token 
+          : "https://avatars.githubusercontent.com/u/121437369?v=4"}
+      alt="User Avatar"
+      class="css-1zpj2q-ImgAvatar e1e9er4e1"/>
+   
+    </Link>
 
 </div>
 </header>
@@ -202,7 +207,9 @@ const App = () => {
         
         <Route path='/Spinner' element ={<Spinner/>} />
         <Route path='/' element ={<FIRSTVIEW/>} />
-       
+        <Route path='/RecpAccount' element ={<RecupAccount/>} />
+        <Route path='/Chat' element ={<RealTimeChat/>} />
+        
 
       </Routes>
     </Router>

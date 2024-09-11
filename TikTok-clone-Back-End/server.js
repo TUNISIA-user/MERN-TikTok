@@ -392,6 +392,22 @@ app.post("/biosUsers/Update/:id", async (req, res) => {
     }
 });
 
+// this section handel for restore your account 
+
+
+app.get('/restoreData/:username', async (req, res) => {
+    const { username } = req.body;
+  
+    // Validate user credentials (pseudo-code)
+    const user = await User.findOne({ username:req.params.username });
+   
+    if (user) {
+      res.json({ success: true, userId: user._id ,user, });
+    } else {
+      res.json({ success: false });
+    }
+  });
+
 
 // Start the server
 app.listen(PORT, () => {

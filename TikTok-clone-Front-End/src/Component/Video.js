@@ -15,7 +15,7 @@ const Video = ({ id, url, channel, desc, like1, message, share, song, document__
         if (entry.isIntersecting) {
           // Element is in view
           if (playing) {
-            videoRef.current.play();
+            videoRef?.current.play();
           }
         } else {
           // Element is out of view

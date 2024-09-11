@@ -344,7 +344,7 @@
     color: #fff;
     font-family: inherit;
     background-color: transparent;
-    border: 1px solid #414141;
+    border: 1px solid #414141; 
   }
   
   .form-container .form-group textarea {

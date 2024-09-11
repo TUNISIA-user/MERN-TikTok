@@ -3,7 +3,8 @@ import './CommonetSection.css';
 import CardCommt from './CardCommt';
 import { Nahdi_Gayth } from '../context/GlobalContext';
 import axios  from './axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const CommonetSection = ({commt}) => {
   
  
@@ -30,35 +31,47 @@ const CommonetSection = ({commt}) => {
 
 
 
-      const handleData = async (e) => {
-        e.preventDefault(); 
+  const handleData = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const Token = Move.channel;
+      const commentText = input;
+      const userId = Move.tokn_user.token;
+      
+      console.log(Token, commentText, userId, "<=>FILE<=>");
+  
+      // Post the comment
+      const response = await axios.put(`/v3/posts/${Token}`, {
+        text: commentText,
+        user: userId
+      });
+  
+      if (response.data) {
+        // Show success toast
         
-        try {
-          const Token = Move.channel
-          console.log(Token)
-          const commentText = input 
-          const userId = Move.tokn_user.token   
-          console.log(Token,commentText,userId,"<=>FILE<=>") // this awsome idea and then you should be add to new arr for ensure this commande 
-          // update when you post something
-          
-             
-        
+        // Create a new comment object based on what you expect to be returned
+        const newComment = {
+          text: commentText,
+          user: {
+            username: Move.tokn_user.name__user__token
+          },
+          createdAt: new Date().toISOString(), // Just for the sake of example
+        };
+  
+        // Update the state to include the new comment
+        setnew1((prevComments) => [...prevComments, newComment]);
+        response &&  toast.success("Your comment has been added!");
+  
+        // Clear the input
+        setinput("");
 
-        
-          const response = await axios.put(`/v3/posts/${Token}`, {
-            text: commentText,
-            user: userId
-        });
-        console.log(response)
-         
-      
-       } catch (error) {
-         console.error("Error updating comment:", error);
-        
-       }
-    //  window.location.reload(); 
-     }; 
-      
+      }
+    } catch (error) {
+      console.error("Error updating comment:", error);
+    }
+  };
+  
   
 
     
@@ -78,9 +91,9 @@ const CommonetSection = ({commt}) => {
 
 
   <div className='search__bar__for__comment'>
-      <div class="Message">
-  <input title="Write Message" id='search__message' tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text" onChange={(e)=>setinput(e.target.value)} value={input}/>
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG"  onClick={handleData} >
+      <div className="Message">
+  <input title="Write Message" id='search__message' tabindex="i" pattern="\d+" placeholder="Message.." className="MsgInput" type="text" onChange={(e)=>setinput(e.target.value)} value={input}/>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" className="SendSVG"  onClick={handleData} >
   <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
   <path d="M44 256 c-3 -8 -4 -29 -2 -48 3  -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
   </g>
@@ -148,7 +161,7 @@ const CommonetSection = ({commt}) => {
           }</p>
      
 </div>
- 
+<ToastContainer />
     </div>
  
 
